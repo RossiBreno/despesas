@@ -1,0 +1,295 @@
+
+::-webkit-datetime-edit-month-field { color: #737380; }
+::-webkit-datetime-edit-day-field { color: #737380; }
+::-webkit-datetime-edit-year-field { color: #737380; }
+
+
+
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #864FDE 0%,  #864FDE 50%, #EFECF3 50%, #EFECF3 100%);
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: Arial;
+}
+
+form {
+    width: 100%;
+}
+
+input:focus, button:focus, textarea:focus {
+    outline: none;
+}
+
+input, textarea, label {
+    margin: 5px 0px 5px 0px;
+    padding: 13px;
+    border: 2px transparent solid;
+    border-radius: 7px;
+
+    background-color: #EFECF3;
+}
+
+textarea {
+    margin: 5px;
+    width: calc(100% - 10px - 25px);
+    font-family: 'Arial';
+}
+
+input::placeholder, label#label-input-file {
+    color: #737380;
+    font-family: Arial';
+}
+textarea::placeholder {
+    color: #737380;
+    font-family: 'Arial';
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 7px;
+    border-width: 0px;
+    width: 100%;
+    max-width: 300px;
+    cursor: pointer;
+
+    font-size: 17px;
+    font-weight: 550;
+}
+
+
+
+#image-logo-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 500px;
+
+    background-color:#864FDE;
+}
+
+#image-logo {
+    width: 100px;
+    height: 100px;
+}
+
+#alert-error {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    width: calc(100% - 30px - 10px);
+    margin-top: 25px;
+    padding: 10px 15px 10px 15px;
+    border-radius: 10px;
+
+    background-color: #f56875;
+}
+
+#warning-icon {
+    width: 50px;
+    height: 50px;
+}
+
+#errors-container {
+    margin-left: 15px;
+}
+
+#errors-container > h4 {
+    margin: 5px 0px 5px 0px;
+}
+
+#show-image-container{
+    display: flex;
+    flex: 1;
+}
+
+#title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+}
+
+#title > a > img {
+    width: 35px;
+    height: 35px;
+}
+
+#title > h1 {
+    margin-left: 10px;
+}
+
+
+#show-image {
+    display: flex;
+    flex: 1;
+    height: auto;
+    max-height: 80vh;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain; 
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+#text-error-message {
+    margin: 0px auto 0px auto;
+    color: #F00;
+}
+
+#input-file {
+    display: none;
+}
+
+#label-input-file {
+    cursor: pointer;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+.error-messages {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 600px;
+    padding: 20px;
+    border-radius: 15px;
+
+    background-color: #FFF;
+}
+
+.card-image {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    margin: 0px 20px 0px 20px;
+    background-color: #fff;
+}
+
+.card-small {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 300px;
+    padding: 20px;
+    border-radius: 15px;
+
+    background-color: #FFF;
+}
+
+.inputs-container {
+    display: flex;
+    flex-direction: column;
+    margin: 25px 0px 25px 0px;
+}
+
+.inputs-container-column {
+    display: flex;
+    flex-direction: row;
+}
+
+.inputs-container-column > input, .inputs-container-column > label  {
+    width: 100%;
+    margin: 5px;
+}
+
+.inputs-container-row > textarea {
+    margin-bottom: 0px;
+}
+
+.inputs-container-row > h5 {
+    margin: 0px 5px 0px 0px;
+    text-align: end;
+}
+
+.input-error {
+    border: 2px red solid;
+} 
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-row-container {
+    flex-direction: row;
+}
+
+.purple-button{
+    background-color: #864FDE;
+    color: #FFF;
+}
+
+.white-button{
+    background-color: #EFECF3;
+    color: #864FDE;
+}
+
+
+
+@media(max-width: 700px){
+    .card {
+        width: 300px;
+    }
+
+    .inputs-container-column {
+        flex-direction: column;
+    }
+
+    .inputs-container-column > input, .inputs-container-column > label {
+        width: auto;
+    }
+
+    textarea {
+        width: calc(100% - 40px);
+    }
+    
+}
+
+
+@media(max-width: 500px){
+    #text-error-message {
+        font-size: 17px;
+    }
+
+    .card-small {
+        width: 70%;
+    }
+    
+    .card {
+        width: 70%;
+    }
+
+    button, input, textarea, label#label-input-file {
+        padding: 20px;
+        font-size: 20px;
+        max-width: 500px;
+    }
+}
