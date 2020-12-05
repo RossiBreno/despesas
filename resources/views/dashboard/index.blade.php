@@ -20,15 +20,13 @@
         <div id="data-container">
             <div id="chart-container">  
                 <h1>Gráfico</h1>
-                <?php 
-                    if(@$chart[amount] > 1){ ?>
-                            <div id="chart"></div>
-                    <?php }else{ ?>
-                            <div id="empty-chart">
-                                <h2>Você precisa ter pelo menos 2 despesas para montar um gráfico</h2>
-                            </div>
-                    <?php }
-                ?>
+                @if(@$chart[amount] > 1)
+                    <div id="chart"></div>
+                @else
+                    <div id="empty-chart">
+                        <h2>Você precisa ter pelo menos 2 despesas para montar um gráfico</h2>
+                    </div>
+                @endif
             </div>
             <div id="info-container">
                 <h1>Informações deste Mês</h1>
@@ -80,10 +78,10 @@
                     <div class="filters-column">
                         <h3>Ordem</h3>
                         <select name="order" class="gray-select">
-                            <option <?php if(@$filterOptions[order] == 'rec'){ echo 'selected'; } ?> value="rec">Mais recente</option>
-                            <option <?php if(@$filterOptions[order] == 'ant'){ echo 'selected'; } ?> value="ant">Mais antigo</option>
-                            <option <?php if(@$filterOptions[order] == 'mav'){ echo 'selected'; } ?> value="mav">Maior valor</option>
-                            <option <?php if(@$filterOptions[order] == 'mev'){ echo 'selected'; } ?> value="mev">Menor valor</option>
+                            <option {{@$filterOptions[order] == 'rec' ? 'selected' : ''}} value="rec">Mais recente</option>
+                            <option {{@$filterOptions[order] == 'ant' ? 'selected' : ''}} value="ant">Mais antigo</option>
+                            <option {{@$filterOptions[order] == 'mav' ? 'selected' : ''}} value="mav">Maior valor</option>
+                            <option {{@$filterOptions[order] == 'mev' ? 'selected' : ''}} value="mev">Menor valor</option>
                         </select>
                     </div>
                 </div>
@@ -118,8 +116,8 @@
                         </div>
                         <div class="info-despesa-card">
                             <div class="price-row">
-                                <h2>R${{explode(".", $despesa->value)[0]}}</h2>
-                                <h4>,{{explode(".", $despesa->value)[1]}}</h4>
+                                <h2>{{$despesa->value}}</h2>
+                                <h4>,{{$despesa->cents}}</h4>
                             </div>
                             <h3>{{$despesa->desc}}</h3>
                         </div>    

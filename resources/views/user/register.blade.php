@@ -1,21 +1,15 @@
 @extends('template.index')
+
 @section('title', 'Cadastro')
 @section('content')
 <div class='card'>
     <div id='image-logo-container'>
         <image id='image-logo' src="{{ asset('images/logo-branca.svg') }}" />
     </div>
-    @if ($errors->any())
-        <div id="alert-error">
-            <image id='warning-icon' src="{{ asset('images/icons/warning.svg') }}" />
-            <div id="errors-container">
-                @foreach ($errors->all() as $error)
-                    <h4>{{ $error }}</h4>
-                @endforeach
-            </div>    
-        </div>
-    @endif
 
+    @component('components.errorMessage')
+    @endcomponent
+    
     <form method="POST" action="{{route('user.register')}}">
     @csrf
         <div class="inputs-container">

@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 use App\Models\despesa;
 
 class DashboardController extends Controller
 {
     public function index(Request $request){
-        
+
         $userId = Auth::id();
 
         $request->validate([
@@ -25,14 +26,12 @@ class DashboardController extends Controller
         $filterOptions = [];
         if(@$request->dateFrom){
             $filterOptions['dateFrom'] = $request->dateFrom;
-            $date = explode('/', $request->dateFrom);
-            $date = $date[2].'/'.$date[1].'/'.$date[0];
+            $date = Carbon::createFromFormat('d/m/Y', $request->dateFrom)->format('Y-m-d');
             $despesas->where('date', '>=', $date);
         }
         if(@$request->dateAt){
             $filterOptions['dateAt'] = $request->dateAt;
-            $date = explode('/', $request->dateAt);
-            $date = $date[2].'/'.$date[1].'/'.$date[0];
+            $date = Carbon::createFromFormat('d/m/Y', $request->dateAt)->format('Y-m-d');
             $despesas->where('date', '<=', $date);
         }
 
@@ -63,8 +62,9 @@ class DashboardController extends Controller
         $despesas = $despesas->get();
 
         foreach($despesas as $despesa){
-            $newDate = explode('-', $despesa->date);
-            $despesa->date = $newDate[2].'/'.$newDate[1].'/'.$newDate[0];
+            $despesa->date = Carbon::createFromFormat('Y-m-d', $despesa->date)->format('d/m/Y');
+            $despesa->cents = explode(".", $despesa->value)[1];
+            $despesa->value = 'R$'.explode(".", $despesa->value)[0];
         }
 
 
@@ -94,7 +94,7 @@ class DashboardController extends Controller
         $dates = [];
         foreach($chartValues as $chartValue){
             array_push($values, (float) $chartValue->value);
-            array_push($dates, explode('-', $chartValue->date)[2].'/'.explode('-', $chartValue->date)[1]);
+            array_push($dates, Carbon::createFromFormat('Y-m-d', $chartValue->date)->format('d/m'));
         }
         $values = array_reverse($values);
         $dates = array_reverse($dates);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Carbon\Carbon;
 use Storage;
 use App\Models\despesa;
 
@@ -41,8 +42,7 @@ class DespesaController extends Controller
 
         $despesa = new despesa();
         
-        $newDate = explode('/', $request->date);
-        $newDate = $newDate[2].'-'.$newDate[1].'-'.$newDate[0];
+        $newDate = Carbon::createFromFormat('d/m/Y', $request->date)->format('Y-m-d');
 
         $newValue = str_replace(',', '.', $request->value);
         $newValue = str_replace('R$', '', $newValue);
@@ -94,8 +94,7 @@ class DespesaController extends Controller
         $despesa->value = str_replace('.', ',', $despesa->value);
         $despesa->value = 'R$'.$despesa->value;
 
-        $despesa->date = explode('-', $despesa->date);
-        $despesa->date = $despesa->date[2].'/'.$despesa->date[1].'/'.$despesa->date[0];
+        $despesa->date = Carbon::createFromFormat('Y-m-d', $despesa->date)->format('d/m/Y');
         
         return view('despesa.edit', ['despesa' => $despesa]);
     }
@@ -130,8 +129,7 @@ class DespesaController extends Controller
             $despesa->urlImage = $url;
         }
 
-        $newDate = explode('/', $request->date);
-        $newDate = $newDate[2].'-'.$newDate[1].'-'.$newDate[0];
+        $newDate = Carbon::createFromFormat('d/m/Y', $request->date)->format('Y-m-d');
 
         $newValue = str_replace(',', '.', $request->value);
         $newValue = str_replace('R$', '', $newValue);
